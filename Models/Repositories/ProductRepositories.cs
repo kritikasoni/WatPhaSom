@@ -5,41 +5,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Models.Entities;
+using System.Data.Entity;
 
 namespace Models.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        EfDbContext context;
+        private EfDbContext _context;
         public ProductRepository(EfDbContext context)
         {
-            this.context = context;
+            this._context = context;
         }
-        
 
         public void Add(Product p)
         {
-            throw new NotImplementedException();
+            _context.Products.Add(p);
+            _context.SaveChanges();
+          
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            throw new NotImplementedException();
+            var product = _context.Products.Find(id);
+            _context.Products.Remove(product);
+            _context.SaveChanges();
         }
 
-        public void edit(int id)
+        public void Edit(Product p)
         {
-            throw new NotImplementedException();
+            _context.Entry(p).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public List<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Products.ToList();
         }
 
-        public void GetByID(int id)
+        public Product GetById(string id)
         {
-            throw new NotImplementedException();
+            return _context.Products.First(p => p.Id.Equals(id));
         }
     }
 }
