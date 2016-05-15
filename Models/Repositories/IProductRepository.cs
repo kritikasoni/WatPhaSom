@@ -10,8 +10,8 @@ namespace Models.Repositories
     public interface IProductRepository
     {
         List<Product> GetAll();
-        Product GetById(string id);
-        void Delete(string id);
+        Product GetById(int id);
+        void Delete(int id);
         void Edit(Product p);
         void Add(Product p);
     }

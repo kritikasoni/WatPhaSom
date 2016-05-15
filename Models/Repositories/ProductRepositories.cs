@@ -24,7 +24,7 @@ namespace Models.Repository
           
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
             var product = _context.Products.Find(id);
             _context.Products.Remove(product);
@@ -42,7 +42,7 @@ namespace Models.Repository
             return _context.Products.ToList();
         }
 
-        public Product GetById(string id)
+        public Product GetById(int id)
         {
             return _context.Products.First(p => p.Id.Equals(id));
         }

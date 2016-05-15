@@ -20,12 +20,12 @@ namespace Web.Service
             return _productRepository.GetAll();
         }
 
-       public Product GetById(string id)
+       public Product GetById(int id)
        {
            return _productRepository.GetById(id);
        }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
             _productRepository.Delete(id);
         }

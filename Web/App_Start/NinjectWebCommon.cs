@@ -1,3 +1,5 @@
+using Web.Service;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Web.App_Start.NinjectWebCommon), "Stop")]
 
@@ -65,6 +67,7 @@ namespace Web.App_Start
         {
             kernel.Bind<EfDbContext>().To<EfDbContext>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
+            kernel.Bind<ProductService>().To<ProductService>();
         }        
     }
 }

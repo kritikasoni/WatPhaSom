@@ -1,24 +1,31 @@
-﻿using System;
+﻿using Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Service;
 
 namespace Web.Controllers
 {
     public class ProductController : Controller
     {
-        
+        private ProductService _productService;
+
+        public ProductController(ProductService productService)
+        {
+            this._productService = productService;
+        }
         // GET: Product
         public ActionResult Index()
         {
-            return View();
+            return View(_productService.GetAll());
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_productService.GetById(id));
         }
 
         // GET: Product/Create
@@ -29,11 +36,11 @@ namespace Web.Controllers
 
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Product p)
         {
             try
-            {
-                // TODO: Add insert logic here
+            {   //make name,price,description,image=collection and add description
+                _productService.Add(p);
 
                 return RedirectToAction("Index");
             }
@@ -46,16 +53,16 @@ namespace Web.Controllers
         // GET: Product/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_productService.GetById(id));
         }
 
         // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Product p)
         {
             try
             {
-                // TODO: Add update logic here
+                _productService.Edit(p);
 
                 return RedirectToAction("Index");
             }
@@ -68,23 +75,17 @@ namespace Web.Controllers
         // GET: Product/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
             try
             {
-                // TODO: Add delete logic here
-
+                _productService.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
+
+       
     }
 }
