@@ -16,5 +16,5 @@ namespace Models.Repository
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-    }k
+    }
 }
