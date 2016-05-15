@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\News.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Migrations\201605021541110_add product.cs" />
     <Compile Include="Migrations\201605021541110_add product.Designer.cs">

@@ -1,3 +1,5 @@
+using Models.Entities;
+
 namespace Models.Migrations
 {
     using System;
@@ -26,6 +28,12 @@ namespace Models.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Products.AddOrUpdate(
+                p  => p.Id,
+                 new Product { Id = 1, Name="kris", Price=10.0, Description="ggg",Image= "https://brycechristian.files.wordpress.com/2013/11/avrillavigne2.jpg" }
+                
+                );
+            
         }
     }
 }
