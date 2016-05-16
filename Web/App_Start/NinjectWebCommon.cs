@@ -68,6 +68,9 @@ namespace Web.App_Start
             kernel.Bind<EfDbContext>().To<EfDbContext>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
             kernel.Bind<ProductService>().To<ProductService>();
+            kernel.Bind<NewsService>().To<NewsService>();
+            kernel.Bind<INewsRepository>().To<NewsRepository>();
+
         }        
     }
 }

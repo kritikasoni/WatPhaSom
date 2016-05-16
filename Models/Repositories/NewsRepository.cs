@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace Models.Repositories
 {
-    class NewsRepository : INewsRepository
+    public class NewsRepository : INewsRepository
     {
         private EfDbContext _context;
         public NewsRepository(EfDbContext context)
