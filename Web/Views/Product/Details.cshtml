@@ -41,11 +41,13 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
+   
 </p>
 
 @foreach (var item in Model.Reviews)
 {
-    @item.Description
+    @item.Description    
+    <a href=@("/Review/Delete/"+item.Id)>Delete</a>
     <br/>
 }
 

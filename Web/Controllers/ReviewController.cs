@@ -75,17 +75,17 @@ namespace Web.Controllers
 
        // POST: Review/Delete/5
         [HttpGet]
-        public ActionResult Delete(int id)
+        public void Delete(int id)
         {
             try
             {
                 _reviewService.Delete(id);
 
-                return RedirectToAction("Index");
+                Response.Redirect(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
-                return RedirectToAction("Index");
+                Response.Redirect(Request.UrlReferrer.AbsoluteUri);
             }
         }
     }
