@@ -26,6 +26,7 @@ namespace Web.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+           // context.Product.AddOrUpdate( p=>p.)
         }
     }
 }

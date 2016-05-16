@@ -11,6 +11,7 @@ namespace Models.Repository
 
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<News> NewsList { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
