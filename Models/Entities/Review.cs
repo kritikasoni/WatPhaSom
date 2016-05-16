@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,22 +9,18 @@ using Models.Entities;
 
 namespace Models.Entities
 {
-    public class Product
-
+   public  class Review
     {
+        public Review() { }
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; }
 
-        public virtual ICollection<Review> Reviews { get; set; }
-        public Product()
-        {
-            Reviews = new List<Review>();
-        }
+        public int ProductId { get; set; }
+
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
     }
-    
 
+ 
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.Service;
+using Models.ViewModels;
 
 namespace Web.Controllers
 {
@@ -36,11 +37,15 @@ namespace Web.Controllers
 
         // POST: News/Create
         [HttpPost]
-        public ActionResult Create(News n)
+        public ActionResult Create(NewsViewModel.NewsAddModel n)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             try
             {
-               _newsService.Add(n);
+               _newsService.Add(n.GetNews());
 
                 return RedirectToAction("Index");
             }
@@ -75,7 +80,7 @@ namespace Web.Controllers
      
 
         // POST: News/Delete/5
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             try

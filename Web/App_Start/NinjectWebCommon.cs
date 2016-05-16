@@ -70,6 +70,8 @@ namespace Web.App_Start
             kernel.Bind<ProductService>().To<ProductService>();
             kernel.Bind<NewsService>().To<NewsService>();
             kernel.Bind<INewsRepository>().To<NewsRepository>();
+            kernel.Bind<IReviewRepository>().To<ReviewRepository>();
+            kernel.Bind<ReviewService>().To<ReviewService>();
 
         }        
     }

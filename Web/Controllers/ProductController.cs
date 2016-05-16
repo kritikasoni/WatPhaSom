@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models.Repository.ViewModels;
 using Web.Service;
 
 namespace Web.Controllers
@@ -36,11 +37,15 @@ namespace Web.Controllers
 
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(Product p)
+        public ActionResult Create(ProductViewModel.ProductAddModel p)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             try
             {   //make name,price,description,image=collection and add description
-                _productService.Add(p);
+                _productService.Add(p.GetProduct());
 
                 return RedirectToAction("Index");
             }

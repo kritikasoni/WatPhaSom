@@ -42,3 +42,32 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@foreach (var item in Model.Reviews)
+{
+    @item.Description
+    <br/>
+}
+
+@using (Html.BeginForm("Create","Review",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Comment</h4>
+        <hr />
+        <div class="form-group">
+            <label for="review-description"></label>
+            <div class="col-md-10">
+                <input id="review-description" class="form-control" name="Description" placeholder="Comment here"/>
+            </div>
+        </div>
+        <input type="hidden" name="ProductId" value=@Model.Id />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
