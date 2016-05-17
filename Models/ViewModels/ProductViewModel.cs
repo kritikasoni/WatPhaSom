@@ -20,7 +20,7 @@ namespace Models.Repository.ViewModels
 
             public Product GetProduct()
             {
-                return new Product {Name = this.Name, Description = this.Description, Image = this.Image, Price = this.Price};
+                return new Product {Name = this.Name, Description = this.Description, Image = this.Image, WholesalePrice = this.Price};
             }
         }
     }

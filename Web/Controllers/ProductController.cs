@@ -17,14 +17,31 @@ namespace Web.Controllers
         {
             this._productService = productService;
         }
-        // GET: Product
-        public ActionResult Index()
+        // GET: Product page for admin
+ public ActionResult Index()
+        {
+            return View(_productService.GetAll());
+        }
+
+        public ActionResult IndexPublicWholesale()
+        {
+            return View(_productService.GetAll());
+        }
+        public ActionResult IndexPublicRetail()
         {
             return View(_productService.GetAll());
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int id)
+        {
+            return View(_productService.GetById(id));
+        }
+        public ActionResult DetailsPublicRetail(int id)
+        {
+            return View(_productService.GetById(id));
+        }
+        public ActionResult DetailsPublicWholesale(int id)
         {
             return View(_productService.GetById(id));
         }

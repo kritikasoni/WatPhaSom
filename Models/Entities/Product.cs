@@ -14,7 +14,8 @@ namespace Models.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public double WholesalePrice { get; set; }
+        public double RetailPrice { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
 

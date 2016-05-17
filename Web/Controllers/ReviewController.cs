@@ -37,17 +37,17 @@ namespace Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Details", "Product", new {id = r.GetReview().ProductId});
+                return RedirectToAction("DetailsPublic", "Product", new {id = r.GetReview().ProductId});
             }
             try
             {
                 _reviewService.Add(r.GetReview());
 
-                return RedirectToAction("Details", "Product", new { id = r.GetReview().ProductId });
+                return RedirectToAction("DetailsPublic", "Product", new { id = r.GetReview().ProductId });
             }
             catch
             {
-                return RedirectToAction("Details", "Product", new { id = r.GetReview().ProductId });
+                return RedirectToAction("DetailsPublic", "Product", new { id = r.GetReview().ProductId });
             }
         }
 

@@ -22,9 +22,18 @@ namespace Web.Controllers
         {
             return View(_newsService.GetAll());
         }
+        public ActionResult IndexPublic()
+        {
+            return View(_newsService.GetAll());
+        }
 
         // GET: News/Details/5
         public ActionResult Details(int id)
+        {
+            return View(_newsService.GetById(id));
+        }
+
+        public ActionResult DetailsPublic(int id)
         {
             return View(_newsService.GetById(id));
         }

@@ -11,7 +11,7 @@ namespace Models.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Models.Repository.EfDbContext context)
@@ -28,20 +28,11 @@ namespace Models.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
             context.Products.AddOrUpdate(
                 p => p.Id,
-                 new Product { Id = 1, Name = "kris", Price = 10.0, Description = "ggg", Image = "https://brycechristian.files.wordpress.com/2013/11/avrillavigne2.jpg" }
+                new Product {Id = 1,Name="GABA",WholesalePrice=85,RetailPrice = 100,Description="hello from the other side!!!",Image=""});
 
-                );
-            context.NewsList.AddOrUpdate(
-               n => n.Id,
-                new News { Id = 1, Title = "Adele", Description = "hello from the other side!", Image = "http://www.billboard.com/files/styles/article_main_image/public/media/Adele-2015-press-Alasdair-McLellan-XL-billboard-650-2.jpg" }
-
-               );
-            context.Reviews.AddOrUpdate(
-                r => r.Id,
-                new Review { Id = 1, Description = "very good", ProductId = 1 }
-                );
         }
     }
 }
