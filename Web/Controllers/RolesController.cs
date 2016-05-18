@@ -7,8 +7,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Models.Entities;
+using WatPhaSom.Models;
 using Web;
 using Web.Models;
+
 
 namespace WatPhaSom.Controllers
 {
@@ -29,7 +32,29 @@ namespace WatPhaSom.Controllers
             var roles = context.Roles.ToList();
             return View(roles);
         }
+        public ActionResult GetUsers()
+        {
+            var allusers = context.Users.ToList();
 
+
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+
+            var wholesale = roleManager.FindByName("Wholesale").Users.First();
+            var usersInRole = allusers.Where(u => u.Roles.Select(r => r.RoleId).Contains(wholesale.RoleId)).ToList();
+            var userwholesale = usersInRole.Select(user => new UserViewModel { Username = user.UserName, Roles = "Wholesale" }).ToList();
+
+            var retail = roleManager.FindByName("Retail").Users.First();
+            var usersInRole2 = allusers.Where(u => u.Roles.Select(r => r.RoleId).Contains(retail.RoleId)).ToList();
+            var userretail = usersInRole2.Select(user => new UserViewModel { Username = user.UserName, Roles = "Retail" }).ToList();
+
+
+            userwholesale.AddRange(userretail); // Allmember
+
+            return View(userwholesale);
+
+        }
 
         //
         // GET: /Roles/Create
