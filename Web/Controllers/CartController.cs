@@ -3,87 +3,95 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models.Entities;
+using Models.Repositories;
+using Models.Repository;
+using Models.ViewModels;
+using Web.Service;
 
 namespace Web.Controllers
 {
     public class CartController : Controller
     {
-        // GET: Cart
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private ProductService _productService;
 
-        // GET: Cart/Details/5
-        public ActionResult Details(int id)
+        public CartController(ProductService productService)
         {
-            return View();
-        }
 
-        // GET: Cart/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+            this._productService = productService;
 
-        // POST: Cart/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        }
+        public ViewResult Index(string returnUrl)
         {
-            try
+             Cart cart = GetCart();
+
+            return View(new CartIndexViewModel
             {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                Cart = cart,
+                ReturnUrl = returnUrl
+
+            });
+
         }
 
-        // GET: Cart/Edit/5
-        public ActionResult Edit(int id)
+        public RedirectToRouteResult AddToCart(int productId, string returnUrl, int amount)
         {
-            return View();
+
+            Product product = _productService.GetById(productId);
+               
+
+            if (product != null)
+            {
+                Cart cart = GetCart();
+                cart.AddItem(product, amount);
+                Session["Cart"] = cart;
+
+            }
+
+            return RedirectToAction("Index", new {returnUrl});
+
         }
 
-        // POST: Cart/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public RedirectToRouteResult RemoveFromCart(int productId, string returnUrl)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            Product product = _productService.GetById(productId);
+
+            if (product != null)
             {
-                return View();
+
+                GetCart().RemoveLine(product);
+
             }
+
+            return RedirectToAction("Index", new {returnUrl});
+
         }
 
-        // GET: Cart/Delete/5
-        public ActionResult Delete(int id)
+        public RedirectToRouteResult UpdateLine(int productId, int newQuantity, string returnUrl)
         {
-            return View();
+
+            Product product = _productService.GetById(productId);
+
+            if (product != null)
+            {
+                Cart cart = GetCart();
+                cart.UpdateLine(product,newQuantity);
+                Session["Cart"] = cart;
+            }
+            return RedirectToAction("Index", new { returnUrl });
         }
 
-        // POST: Cart/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        private Cart GetCart()
         {
-            try
+            Cart cart = (Cart) Session["Cart"];
+            if (cart == null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                cart = new Cart();
+                Session["Cart"] = cart;
             }
-            catch
-            {
-                return View();
-            }
+            return cart;
         }
     }
 }

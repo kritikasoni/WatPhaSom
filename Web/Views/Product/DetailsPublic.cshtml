@@ -24,6 +24,18 @@
                 @Html.DisplayFor(model => model.Name)
             </dd>
 
+           @if (User.IsInRole("Retail"))
+           {
+               <dt>
+                   @Html.DisplayNameFor(model => model.RetailPrice)
+               </dt>
+
+               <dd>
+                   @Html.DisplayFor(model => model.RetailPrice)
+               </dd>
+           }
+           else
+           {
             <dt>
                 @Html.DisplayNameFor(model => model.WholesalePrice)
             </dt>
@@ -31,6 +43,7 @@
             <dd>
                 @Html.DisplayFor(model => model.WholesalePrice)
             </dd>
+           }
 
             <dt>
                 @Html.DisplayNameFor(model => model.Description)
@@ -45,15 +58,33 @@
             </dt>
 
             <dd>
-                <img src="model.Image" height="500" width="500" />
+                <img src=model.Image height="200" width="200" />
             </dd>
 
         </dl>
     </div>
-    <p>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
 
-        @Html.ActionLink("Back to List", "IndexPublicWholesale")
-    </p>
+@Html.ActionLink("AddToCart", "Cart"))
+{
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+
+    <input type="submit" value="+ Add to cart" />
+
+}
+    @if (User.IsInRole("Retail"))
+    {
+        <h4>@Model.RetailPrice.ToString("c")</h4>
+    }
+    else
+    {
+        <h4>@Model.WholesalePrice.ToString("c")</h4>
+    }
+</p>
 
     @foreach (var item in Model.Reviews)
     {
@@ -75,7 +106,7 @@
                     <input id="review-description" class="form-control" name="Description" placeholder="Comment here" />
                 </div>
             </div>
-            <input type="hidden" name="ProductId" value=@Model.Id />
+            <input type="hidden" name="Id" value=@Model.Id />
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

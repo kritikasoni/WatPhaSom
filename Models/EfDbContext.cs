@@ -14,7 +14,9 @@ namespace Models.Repository
         public DbSet<News> NewsList { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

@@ -18,16 +18,7 @@ namespace Web.Controllers
             this._productService = productService;
         }
         // GET: Product page for admin
- public ActionResult Index()
-        {
-            return View(_productService.GetAll());
-        }
-
-        public ActionResult IndexPublicWholesale()
-        {
-            return View(_productService.GetAll());
-        }
-        public ActionResult IndexPublicRetail()
+        public ActionResult Index()
         {
             return View(_productService.GetAll());
         }
@@ -37,11 +28,8 @@ namespace Web.Controllers
         {
             return View(_productService.GetById(id));
         }
-        public ActionResult DetailsPublicRetail(int id)
-        {
-            return View(_productService.GetById(id));
-        }
-        public ActionResult DetailsPublicWholesale(int id)
+        // GET: Product/Details/5
+        public ActionResult DetailsPublic(int id)
         {
             return View(_productService.GetById(id));
         }

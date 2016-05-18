@@ -11,40 +11,9 @@ namespace Models.Migrations
                 "dbo.Cart",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        CartId = c.String(),
-                        ProductId = c.Int(nullable: false),
-                        Count = c.Int(nullable: false),
-                        DateCreated = c.DateTime(nullable: false),
+                        CartId = c.Int(nullable: false, identity: true),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
-                .Index(t => t.ProductId);
-            
-            CreateTable(
-                "dbo.Product",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        WholesalePrice = c.Double(nullable: false),
-                        RetailPrice = c.Double(nullable: false),
-                        Description = c.String(),
-                        Image = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Review",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Description = c.String(),
-                        ProductId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
-                .Index(t => t.ProductId);
+                .PrimaryKey(t => t.CartId);
             
             CreateTable(
                 "dbo.News",
@@ -95,23 +64,46 @@ namespace Models.Migrations
                     })
                 .PrimaryKey(t => t.OrderId);
             
+            CreateTable(
+                "dbo.Product",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        WholesalePrice = c.Double(nullable: false),
+                        RetailPrice = c.Double(nullable: false),
+                        Description = c.String(),
+                        Image = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Review",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Description = c.String(),
+                        ProductId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
+                .Index(t => t.ProductId);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.OrderDetail", "ProductId", "dbo.Product");
-            DropForeignKey("dbo.OrderDetail", "OrderId", "dbo.Order");
-            DropForeignKey("dbo.Cart", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Review", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.OrderDetail", "OrderId", "dbo.Order");
+            DropIndex("dbo.Review", new[] { "ProductId" });
             DropIndex("dbo.OrderDetail", new[] { "ProductId" });
             DropIndex("dbo.OrderDetail", new[] { "OrderId" });
-            DropIndex("dbo.Review", new[] { "ProductId" });
-            DropIndex("dbo.Cart", new[] { "ProductId" });
+            DropTable("dbo.Review");
+            DropTable("dbo.Product");
             DropTable("dbo.Order");
             DropTable("dbo.OrderDetail");
             DropTable("dbo.News");
-            DropTable("dbo.Review");
-            DropTable("dbo.Product");
             DropTable("dbo.Cart");
         }
     }

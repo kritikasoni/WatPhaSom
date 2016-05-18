@@ -33,21 +33,21 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Create(ReviewViewModel.ReviewAddModel r)
         {
-            System.Diagnostics.Debug.WriteLine(r.GetReview().ProductId);
+            System.Diagnostics.Debug.WriteLine(r.ProductId);
 
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("DetailsPublic", "Product", new {id = r.GetReview().ProductId});
+                return RedirectToAction("Details", "Product", new {id = r.ProductId});
             }
             try
             {
                 _reviewService.Add(r.GetReview());
 
-                return RedirectToAction("DetailsPublic", "Product", new { id = r.GetReview().ProductId });
+                return RedirectToAction("Details", "Product", new { id = r.ProductId });
             }
             catch
             {
-                return RedirectToAction("DetailsPublic", "Product", new { id = r.GetReview().ProductId });
+                return RedirectToAction("Details", "Product", new { id = r.ProductId });
             }
         }
 

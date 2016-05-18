@@ -1,53 +1,99 @@
-﻿@model IEnumerable<Models.Entities.Cart>
-
+﻿@model Models.ViewModels.CartIndexViewModel
 @{
-    Layout = null;
+
+    ViewBag.Title = "Sports Store: Your Cart";
+
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
+<h2>Your cart</h2>
+
+<table align="center">
+
+    <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Count)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
-            <th></th>
+
+            <th align="center">Quantity</th>
+
+            <th align="left">Item</th>
+
+            <th align="right">Price</th>
+
+            <th align="right">Subtotal</th>
+
         </tr>
-    
-    @foreach (var item in Model) {
+    </thead>
+
+    <tbody>
+
+        @foreach (var line in Model.Cart.Lines)
+        {
+
+            <tr>
+                <td align="center">
+
+                    @using (Html.BeginForm("UpdateLine", "Cart", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" name="newQuantity" value=@line.Quantity />
+                                </div>
+                            </div>
+                            <input type="hidden" name="ProductId" value=@line.Product.Id />
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Update" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </td>
+
+                <td align="left">@line.Product.Name</td>
+
+                @if (User.IsInRole("Wholesale"))
+                {
+                    <td align="right">@line.Product.WholesalePrice.ToString("c")</td>
+                    <td align="right">
+                        @((line.Quantity*line.Product.WholesalePrice).ToString("c"))
+                    </td>
+                }
+                else
+                {
+                    <td align="right">@line.Product.RetailPrice.ToString("c")</td>
+                    <td align="right">
+                        @((line.Quantity * line.Product.RetailPrice).ToString("c"))
+                    </td>
+                }
+               
+            </tr>
+
+        }
+
+    </tbody>
+
+    <tfoot>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
+
+            <td colspan="3" align="right">Total:</td>
+
+            <td align="right">
+
+                @Model.Cart.ComputeTotalValue(User.IsInRole("Wholesale") ? "Wholesale" : "Retail").ToString("c")
+
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Count)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+
         </tr>
-    }
-    
-    </table>
-</body>
-</html>
+    </tfoot>
+
+</table>
+
+<p align="center" class="actionButtons">
+
+    <a href="@Model.ReturnUrl">Continue shopping</a>
+
+</p>

@@ -20,6 +20,7 @@ namespace Models.Entities
         public string Image { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+
         public Product()
         {
             Reviews = new List<Review>();

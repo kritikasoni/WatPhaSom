@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Web.Migrations
 {
     using System;
@@ -28,5 +30,6 @@ namespace Web.Migrations
             //
            // context.Product.AddOrUpdate( p=>p.)
         }
+       
     }
 }
