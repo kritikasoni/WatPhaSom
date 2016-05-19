@@ -343,12 +343,12 @@
     <Content Include="Views\Roles\GetUsers.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\ManageUserRoles.cshtml" />
-    <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="locale\th\" />
+    <Folder Include="Views\Checkout\" />
     <Folder Include="Views\Orders\" />
     <Folder Include="Views\Review\" />
   </ItemGroup>

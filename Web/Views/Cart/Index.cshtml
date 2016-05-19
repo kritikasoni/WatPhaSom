@@ -51,6 +51,15 @@
                             </div>
                         </div>
                     }
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+
+                        <input type="hidden" name="ProductId" value=@line.Product.Id />
+
+                        <input class="actionButtons" type="submit"
+                               value="Remove" />
+
+                    }
                 </td>
 
                 <td align="left">@line.Product.Name</td>
