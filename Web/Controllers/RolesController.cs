@@ -15,6 +15,7 @@ using Web.Models;
 
 namespace WatPhaSom.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class RolesController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
