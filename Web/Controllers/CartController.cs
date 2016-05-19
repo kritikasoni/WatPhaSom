@@ -14,6 +14,7 @@ namespace Web.Controllers
     public class CartController : Controller
     {
         private ProductService _productService;
+     //   private IOrderProcessor orderProcessor;
 
         public CartController(ProductService productService)
         {
@@ -82,7 +83,42 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
+        public ViewResult Checkout()
+        {
 
+            return View(new Order());
+
+        }
+        [HttpPost]
+
+        public ViewResult Checkout(Cart cart, Order orders)
+        {
+
+            if (cart.Lines.Count() == 0)
+            {
+
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
+
+            }
+
+         /*   if (ModelState.IsValid)
+            {
+
+                orderProcessor.ProcessOrder(cart, orderDetails);
+
+                cart.Clear();
+
+                return View("Completed");
+
+            }*/
+            else
+            {
+
+               
+
+            }
+ return View();
+        }
         private Cart GetCart()
         {
             Cart cart = (Cart) Session["Cart"];

@@ -8,14 +8,6 @@ namespace Models.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Cart",
-                c => new
-                    {
-                        CartId = c.Int(nullable: false, identity: true),
-                    })
-                .PrimaryKey(t => t.CartId);
-            
-            CreateTable(
                 "dbo.News",
                 c => new
                     {
@@ -104,7 +96,6 @@ namespace Models.Migrations
             DropTable("dbo.Order");
             DropTable("dbo.OrderDetail");
             DropTable("dbo.News");
-            DropTable("dbo.Cart");
         }
     }
 }

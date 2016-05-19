@@ -6,8 +6,10 @@ using System.Linq;
 using System.Web;
 using Models.Entities;
 using System.Data.Entity;
+using Models.Repository;
 
-namespace Models.Repository
+namespace Models.Repositories
+
 {
     public class ProductRepository : IProductRepository
     {

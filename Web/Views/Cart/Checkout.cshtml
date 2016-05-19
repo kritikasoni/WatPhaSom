@@ -1,0 +1,45 @@
+﻿@model Models.Entities.Order
+
+@{
+
+    ViewBag.Title = "SportStore: Checkout";
+
+}
+
+
+
+<h2>Check out now</h2>
+
+Please enter your details, and we'll ship your goods right away!
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <h3>Ship to</h3>
+
+    <div>FirstName: @Html.EditorFor(x => x.FirstName)</div>
+    <div>LastName: @Html.EditorFor(x => x.LastName)</div>
+    <div>Address: @Html.EditorFor(x => x.Address)</div>
+    <div>Email: @Html.EditorFor(x => x.Email)</div>
+    <div>City: @Html.EditorFor(x => x.City)</div>
+    <div>State: @Html.EditorFor(x => x.State)</div>
+    <div>Postal code: @Html.EditorFor(x => x.PostalCode)</div>
+    <div>Country: @Html.EditorFor(x => x.Country)</div>
+
+    <div>Credit card: @Html.EditorFor(x => x.CreditCard)</div>
+    <div>Expiration date: @Html.EditorFor(x => x.Experation)</div>
+    <div>Credit card type: @Html.EditorFor(x => x.CcType)</div>
+ 
+    <div>Save?: @Html.EditorFor(x => x.SaveInfo)</div>
+    <div>Total: @Html.EditorFor(x => x.Total)</div>
+
+
+
+
+    <p align="center">
+
+        <input class="actionButtons" type="submit" value="Complete order" />
+
+    </p>
+
+}

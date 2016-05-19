@@ -1,5 +1,3 @@
-using Models.Entities;
-
 namespace Models.Migrations
 {
     using System;
@@ -11,7 +9,7 @@ namespace Models.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Models.Repository.EfDbContext context)
@@ -28,11 +26,6 @@ namespace Models.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Products.AddOrUpdate(
-              p => p.Id,
-              new Product { Id = 1, Name = "GABA", WholesalePrice = 85, RetailPrice = 100, Description = "hello from the other side!!!", Image = "" });
-
         }
-    
     }
 }
