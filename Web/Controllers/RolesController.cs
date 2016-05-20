@@ -13,7 +13,7 @@ using Web;
 using Web.Models;
 
 
-namespace WatPhaSom.Controllers
+namespace Web.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class RolesController : Controller

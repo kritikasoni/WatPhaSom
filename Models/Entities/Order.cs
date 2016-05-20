@@ -13,7 +13,7 @@ namespace Models.Entities
     public  class Order
     {
 
-        
+        [Key]
         public int OrderId { get; set; }
 
         public System.DateTime OrderDate { get; set; }
@@ -80,7 +80,7 @@ namespace Models.Entities
         public string Email { get; set; }
 
         [ScaffoldColumn(false)]
-        public decimal Total { get; set; }
+        public double Total { get; set; }
 
         public List<OrderDetail> OrderDetails { get; set; }
     }

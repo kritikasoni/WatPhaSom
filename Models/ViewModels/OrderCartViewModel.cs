@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.Entities;
 
-namespace Models.Repositories
+
+
+namespace Models.ViewModels
 {
-   public  interface IOrderProcessor
+   public class OrderCartViewModel
     {
-        void ProcessOrder(Cart cart, Order order, string role);
+        public Order Order { get; set; }
+        public Cart Cart { get; set; }
     }
 }

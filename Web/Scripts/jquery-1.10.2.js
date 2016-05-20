@@ -1368,7 +1368,7 @@ function addHandle( attrs, handler ) {
 }
 
 /**
- * Checks document order of two siblings
+ * Checks document orderInfo of two siblings
  * @param {Element} a
  * @param {Element} b
  * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
@@ -1705,7 +1705,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	/* Sorting
 	---------------------------------------------------------------------- */
 
-	// Document order sorting
+	// Document orderInfo sorting
 	sortOrder = docElem.compareDocumentPosition ?
 	function( a, b ) {
 
@@ -1730,7 +1730,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 					return 1;
 				}
 
-				// Maintain original order
+				// Maintain original orderInfo
 				return sortInput ?
 					( indexOf.call( sortInput, a ) - indexOf.call( sortInput, b ) ) :
 					0;
@@ -3634,7 +3634,7 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ){
 	thisCache = cache[ id ];
 
 	// jQuery data() is stored in a separate object inside the object's internal data
-	// cache in order to avoid key collisions between internal data and user-defined
+	// cache in orderInfo to avoid key collisions between internal data and user-defined
 	// data.
 	if ( !pvt ) {
 		if ( !thisCache.data ) {
@@ -5915,7 +5915,7 @@ jQuery.each({
 				ret = jQuery.unique( ret );
 			}
 
-			// Reverse order for parents* and prev-derivatives
+			// Reverse orderInfo for parents* and prev-derivatives
 			if ( rparentsprev.test( name ) ) {
 				ret = ret.reverse();
 			}
@@ -8020,7 +8020,7 @@ jQuery.extend({
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().match( core_rnotwhite ) || [""];
 
-		// A cross-domain request is in order when we have a protocol:host:port mismatch
+		// A cross-domain request is in orderInfo when we have a protocol:host:port mismatch
 		if ( s.crossDomain == null ) {
 			parts = rurl.exec( s.url.toLowerCase() );
 			s.crossDomain = !!( parts &&

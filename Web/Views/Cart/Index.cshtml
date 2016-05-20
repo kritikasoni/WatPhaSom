@@ -104,7 +104,12 @@
 <p align="center" class="actionButtons">
 
     <a href="@Model.ReturnUrl">Continue shopping</a>
-    @Html.ActionLink("Checkout now", "Checkout")
+
+    @using (Html.BeginForm("Checkout","Cart",FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Check out" />
+    }
 
 </p>
 

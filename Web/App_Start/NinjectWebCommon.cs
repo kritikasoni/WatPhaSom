@@ -1,3 +1,5 @@
+using System.Configuration.Abstractions;
+using Web.Models;
 using Web.Service;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Web.App_Start.NinjectWebCommon), "Start")]
@@ -12,6 +14,7 @@ namespace Web.App_Start
     using Ninject.Web.Common;
     using global::Models.Repositories;
     using global::Models.Repository;
+  //  using static global::Models.Repositories.OrderProcessorRepository;
 
     public static class NinjectWebCommon 
     {
@@ -64,13 +67,17 @@ namespace Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<EfDbContext>().To<EfDbContext>();
+            kernel.Bind<ApplicationDbContext>().To<ApplicationDbContext>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
-            kernel.Bind<ProductService>().To<ProductService>();
+            kernel.Bind<global::Web.Service.ProductService>().To<global::Web.Service.ProductService>();
             kernel.Bind<NewsService>().To<NewsService>();
             kernel.Bind<INewsRepository>().To<NewsRepository>();
             kernel.Bind<IReviewRepository>().To<ReviewRepository>();
             kernel.Bind<ReviewService>().To<ReviewService>();
+            kernel.Bind<IOrderProcessor>().To<OrderProcessorRepository>();
 
-        }        
-    }
+        }
+
+      
+        }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Web.Controllers
 {
@@ -11,6 +12,8 @@ namespace Web.Controllers
         // GET: Orders
         public ActionResult Index()
         {
+            Roles.GetRolesForUser().ToString();
+
             return View();
         }
 

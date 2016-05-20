@@ -1,26 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Models.Entities;
 using Models.Repositories;
-using Models.Repository;
 using Models.ViewModels;
+using Web.Models;
 using Web.Service;
 
 namespace Web.Controllers
 {
     public class CartController : Controller
     {
+        private ApplicationDbContext _context;
         private ProductService _productService;
-     //   private IOrderProcessor orderProcessor;
+        private IOrderProcessor orderProcessor;
 
-        public CartController(ProductService productService)
+        public CartController(ApplicationDbContext context, ProductService productService, IOrderProcessor orderProcessor)
+        {
+            _context = context;
+            _productService = productService;
+            this.orderProcessor = orderProcessor;
+        }
+
+        public CartController(Service.ProductService productService, IOrderProcessor proc)
         {
 
             this._productService = productService;
+            orderProcessor = proc;
+        }
 
+        public ViewResult Summary(Cart cart)
+        {
+            return View(cart);
         }
         public ViewResult Index(string returnUrl)
         {
@@ -89,36 +102,40 @@ namespace Web.Controllers
             return View(new Order());
 
         }
+
         [HttpPost]
-
-        public ViewResult Checkout(Cart cart, Order orders)
+        public ViewResult Checkout(Cart cart, Order order)
         {
-
-            if (cart.Lines.Count() == 0)
+            cart = GetCart();
+            order.Username = User.Identity.GetUserName();
+            order.OrderDetails = new List<OrderDetail>();
+           
+            try
             {
-
-                ModelState.AddModelError("", "Sorry, your cart is empty!");
-
+                if (cart.Lines.Count() == 0)
+                {
+                    ModelState.AddModelError("", "Sorry, your cart is empty!");
+                }
+                if (ModelState.IsValid)
+                {
+                    string role = User.IsInRole("Wholesale") ? "Wholesale" : "Retail";
+                    orderProcessor.ProcessOrder(cart, order, role);
+                    cart.Clear();
+                    return View("Completed");
+                }
+                else
+                {
+                    return View(order);
+                }
             }
-
-         /*   if (ModelState.IsValid)
+            catch(Exception e)
             {
-
-                orderProcessor.ProcessOrder(cart, orderDetails);
-
-                cart.Clear();
-
-                return View("Completed");
-
-            }*/
-            else
-            {
-
-               
-
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                return View(order);
             }
- return View();
+           
         }
+
         private Cart GetCart()
         {
             Cart cart = (Cart) Session["Cart"];

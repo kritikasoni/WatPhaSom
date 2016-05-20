@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Security;
 using WatPhaSom.Models;
 
 namespace Models.Entities
@@ -52,6 +53,8 @@ namespace Models.Entities
 
         public double ComputeTotalValue(string roleName)
         {
+           // string[] roleNames = Roles.GetRolesForUser();
+            
             if (roleName.Equals("Wholesale"))
             {
                 return lineCollection.Sum(e => e.Product.WholesalePrice * e.Quantity);
