@@ -86,6 +86,7 @@
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ReviewRepository.cs" />
     <Compile Include="ViewModels\CartIndexViewModel.cs" />
+    <Compile Include="ViewModels\CheckOutViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="ViewModels\OrderCartViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />

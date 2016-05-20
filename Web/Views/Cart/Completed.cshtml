@@ -1,11 +1,109 @@
-﻿@{
+﻿@model Models.Entities.Order
 
-    ViewBag.Title = "SportsStore: Order Submitted";
+<p>
+    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Experation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreditCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CcType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaveInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
 
-}
+    <tr>
+        <td>
+            @Model.OrderDate
+        </td>
+        <td>
+            @Model.Username
+        </td>
+        <td>
+            @Model.FirstName
+        </td>
+        <td>
+            @Model.LastName
+        </td>
+        <td>
+            @Model.Address
+        </td>
+        <td>
+            @Model.City
+        </td>
+        <td>
+            @Model.State
+        </td>
+        <td>
+            @Model.PostalCode
+        </td>
+        <td>
+            @Model.Country
+        </td>
+        <td>
+            @Model.Phone
+        </td>
+        <td>
+            @Model.Experation
+        </td>
+        <td>
+            @Model.CreditCard
+        </td>
+        <td>
+            @Model.CcType
+        </td>
+        <td>
+            @Model.SaveInfo
+        </td>
+        <td>
+            @Model.Email
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=@Model.OrderId }) |
+           
+        </td>
+    </tr>
 
 
-
-<h2>Thanks!</h2>
-
-Thanks for placing your order. We'll ship your goods as soon as possible.
+</table>

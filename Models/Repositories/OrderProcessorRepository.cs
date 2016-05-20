@@ -53,7 +53,29 @@ namespace Models.Repositories
             
             }
 
+        public void Edit(Order o)
+        {
+            _context.Entry(o).State = EntityState.Modified;
+            _context.SaveChanges();
         }
+
+        public Order GetById(int id)
+        {
+            return _context.Orders.First(o => o.OrderId.Equals(id));
+        }
+
+        public void Delete(int id)
+        {
+            var order = _context.Orders.Find(id);
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+        }
+
+        public List<Order> GetAll()
+        {
+            return _context.Orders.ToList();
+        }
+    }
     }
 
 
