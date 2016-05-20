@@ -15,20 +15,22 @@ namespace Web.Controllers
     {
         private ApplicationDbContext _context;
         private ProductService _productService;
-        private IOrderProcessor orderProcessor;
+        private IOrderProcessor _orderProcessor;
+        private OrderService _orderService;
 
-        public CartController(ApplicationDbContext context, ProductService productService, IOrderProcessor orderProcessor)
+        public CartController(ApplicationDbContext context, ProductService productService, IOrderProcessor orderProcessor,OrderService orderService)
         {
             _context = context;
             _productService = productService;
-            this.orderProcessor = orderProcessor;
+            this._orderProcessor = orderProcessor;
+            this._orderService = orderService;
         }
 
         public CartController(Service.ProductService productService, IOrderProcessor proc)
         {
 
             this._productService = productService;
-            orderProcessor = proc;
+            _orderProcessor = proc;
         }
 
         public ViewResult Summary(Cart cart)
@@ -96,9 +98,9 @@ namespace Web.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
+        [HttpGet]
         public ViewResult Checkout()
         {
-
             return View(new Order());
 
         }
@@ -106,33 +108,49 @@ namespace Web.Controllers
         [HttpPost]
         public ViewResult Checkout(Cart cart, Order order)
         {
+            string role = User.IsInRole("Wholesale") ? "Wholesale" : "Retail";
             cart = GetCart();
             order.Username = User.Identity.GetUserName();
-            order.OrderDetails = new List<OrderDetail>();
-           
-            try
+            
+            var orderDetails = new List<OrderDetail>();
+            foreach (var line in cart.Lines)
             {
-                if (cart.Lines.Count() == 0)
+                var orderDetail = new OrderDetail
                 {
-                    ModelState.AddModelError("", "Sorry, your cart is empty!");
-                }
-                if (ModelState.IsValid)
-                {
-                    string role = User.IsInRole("Wholesale") ? "Wholesale" : "Retail";
-                    orderProcessor.ProcessOrder(cart, order, role);
-                    cart.Clear();
-                    return View("Completed");
-                }
-                else
-                {
-                    return View(order);
-                }
+                    Product = line.Product,
+                    Quantity = line.Quantity,
+                    UnitPrice = role.Equals("Wholesale")
+                        ? line.Product.WholesalePrice
+                        : line.Product.RetailPrice
+                };
+                orderDetails.Add(orderDetail);
+                order.OrderDetails.Add(orderDetail);
             }
-            catch(Exception e)
+       //     order.OrderDetails.Add(Session["Cart"]); 
+
+            if (cart.Lines.Count() == 0)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
+            }
+            if (ModelState.IsValid)
+            {
+                    
+                _orderProcessor.ProcessOrder(cart, order, role);
+                foreach (var orderDetail in orderDetails)
+                {
+                    orderDetail.OrderId = order.OrderId;
+                    orderDetail.ProductId = orderDetail.Product.Id;
+                    orderDetail.Product = null;
+                    _orderService.AddOrderDetail(orderDetail);
+                }
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
                 return View(order);
             }
+           
            
         }
 
@@ -146,5 +164,7 @@ namespace Web.Controllers
             }
             return cart;
         }
+
+
     }
 }

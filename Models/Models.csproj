@@ -68,23 +68,20 @@
     <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Review.cs" />
-    <Compile Include="Migrations\201605191110151_initial.cs" />
-    <Compile Include="Migrations\201605191110151_initial.Designer.cs">
-      <DependentUpon>201605191110151_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605200708403_order-update-total-price.cs" />
-    <Compile Include="Migrations\201605200708403_order-update-total-price.Designer.cs">
-      <DependentUpon>201605200708403_order-update-total-price.cs</DependentUpon>
+    <Compile Include="Migrations\201605201814023_initial.cs" />
+    <Compile Include="Migrations\201605201814023_initial.Designer.cs">
+      <DependentUpon>201605201814023_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EfDbContext.cs" />
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IOrderProcessor.cs" />
-    <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\IOrderDetailRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IReviewRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />
+    <Compile Include="Repositories\OrderDetailRepository.cs" />
     <Compile Include="Repositories\OrderProcessorRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ReviewRepository.cs" />
@@ -99,11 +96,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605191110151_initial.resx">
-      <DependentUpon>201605191110151_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605200708403_order-update-total-price.resx">
-      <DependentUpon>201605200708403_order-update-total-price.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605201814023_initial.resx">
+      <DependentUpon>201605201814023_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

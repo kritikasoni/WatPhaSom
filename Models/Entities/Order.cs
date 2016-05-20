@@ -82,6 +82,11 @@ namespace Models.Entities
         [ScaffoldColumn(false)]
         public double Total { get; set; }
 
-        public List<OrderDetail> OrderDetails { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
+
+        public Order()
+        {
+            OrderDetails = new List<OrderDetail>();
+        }
     }
 }

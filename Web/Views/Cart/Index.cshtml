@@ -101,16 +101,16 @@
 
 </table>
 
-<p align="center" class="actionButtons">
+<row>
 
-    <a href="@Model.ReturnUrl">Continue shopping</a>
+    <div class="col-xs-offset-4">
+        <a href="@Model.ReturnUrl">
+            <button class="col-xs-4 btn btn-primary">Continue shopping</button>
+        </a>
 
-    @using (Html.BeginForm("Checkout","Cart",FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <input type="submit" value="Check out" />
-    }
+        <a href="/Cart/Checkout">
+            <button class="col-xs-4 btn btn-default">Checkout</button>
+        </a>
 
-</p>
-
+</row>
 

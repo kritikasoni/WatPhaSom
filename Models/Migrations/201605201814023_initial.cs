@@ -22,13 +22,13 @@ namespace Models.Migrations
                 "dbo.OrderDetail",
                 c => new
                     {
-                        OrderDetailId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         OrderId = c.Int(nullable: false),
                         ProductId = c.Int(nullable: false),
                         Quantity = c.Int(nullable: false),
-                        UnitPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        UnitPrice = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => t.OrderDetailId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Order", t => t.OrderId, cascadeDelete: true)
                 .ForeignKey("dbo.Product", t => t.ProductId, cascadeDelete: true)
                 .Index(t => t.OrderId)
@@ -52,7 +52,7 @@ namespace Models.Migrations
                         Experation = c.DateTime(nullable: false),
                         SaveInfo = c.Boolean(nullable: false),
                         Email = c.String(),
-                        Total = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Total = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.OrderId);
             

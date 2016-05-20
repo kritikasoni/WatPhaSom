@@ -27,26 +27,27 @@ namespace Models.Repositories
 
             public void ProcessOrder(Cart cart, Order order, string role)
             {
-                order.Total = 0;
-
+                double total = 0.0;
                 if (role.Equals("Wholesale"))
                 {
 
                     foreach (var o in order.OrderDetails)
                     {
-                        order.Total += o.Product.WholesalePrice*o.Quantity;
+                       total += o.Product.WholesalePrice*o.Quantity;
                     }
                 }
                 else
                 {
 
-                foreach (var o in order.OrderDetails)
-                {
-                    order.Total += o.Product.RetailPrice * o.Quantity;
+                    foreach (var o in order.OrderDetails)
+                    {
+                        total += o.Product.RetailPrice * o.Quantity;
+                    }
                 }
-            }
                 order.OrderDate = DateTime.Now;
                 order.Experation = DateTime.Now;
+                order.Total = total;
+                order.OrderDetails = new List<OrderDetail>();
                 _context.Entry(order).State = EntityState.Added;
                 _context.SaveChanges();
             
@@ -54,5 +55,8 @@ namespace Models.Repositories
 
         }
     }
+
+
+
 
 

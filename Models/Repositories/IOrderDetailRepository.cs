@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Models.Repositories
 {
-  public interface IOrderRepository
+  public interface IOrderDetailRepository
     {
-        List<Order> GetAll();
-        Order GetById(int id);
+        List<OrderDetail> GetAll();
+        OrderDetail GetById(int id);
         void Delete(int id);
-        void Edit(Order p);
-        void Add(Order p);
+        void Edit(OrderDetail p);
+        void Add(OrderDetail p);
     }
 }
+

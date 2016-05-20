@@ -75,6 +75,8 @@ namespace Web.App_Start
             kernel.Bind<IReviewRepository>().To<ReviewRepository>();
             kernel.Bind<ReviewService>().To<ReviewService>();
             kernel.Bind<IOrderProcessor>().To<OrderProcessorRepository>();
+            kernel.Bind<IOrderDetailRepository>().To<OrderDetailRepository>();
+            kernel.Bind<OrderService>().To<OrderService>();
 
         }
 

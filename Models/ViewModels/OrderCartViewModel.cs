@@ -13,5 +13,6 @@ namespace Models.ViewModels
     {
         public Order Order { get; set; }
         public Cart Cart { get; set; }
+
     }
 }
