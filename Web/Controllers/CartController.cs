@@ -144,7 +144,7 @@ namespace Web.Controllers
                     _orderService.AddOrderDetail(orderDetail);
                 }
                 cart.Clear();
-                return View("Completed");
+                return View("Completed",order);
             }
             else
             {

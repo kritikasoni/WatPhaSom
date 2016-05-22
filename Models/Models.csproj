@@ -68,9 +68,9 @@
     <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Review.cs" />
-    <Compile Include="Migrations\201605201814023_initial.cs" />
-    <Compile Include="Migrations\201605201814023_initial.Designer.cs">
-      <DependentUpon>201605201814023_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201605210903294_init.cs" />
+    <Compile Include="Migrations\201605210903294_init.Designer.cs">
+      <DependentUpon>201605210903294_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\ReviewRepository.cs" />
     <Compile Include="ViewModels\CartIndexViewModel.cs" />
+    <Compile Include="ViewModels\CheckOutViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="ViewModels\OrderCartViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -96,8 +97,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605201814023_initial.resx">
-      <DependentUpon>201605201814023_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605210903294_init.resx">
+      <DependentUpon>201605210903294_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
