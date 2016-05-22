@@ -28,7 +28,7 @@ Please enter your details, and we'll ship your goods right away!
     <div>Credit card type: @Html.EditorFor(x => x.CcType)</div>
  
     <div>Save?: @Html.EditorFor(x => x.SaveInfo)</div>
-    <div>Total: @Html.EditorFor(x => x.Total)</div>
+    
 
         @Html.AntiForgeryToken()
         <input type="submit" value="Check out" />
